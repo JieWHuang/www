@@ -131,3 +131,11 @@ def tag(request, tag_id):
 
 def about(request):
     return render(request, 'about.html', {'nav': 'aboutme'})
+
+
+def page_not_found(request):
+    return render(request, '404.html')
+
+
+def page_errors(request):
+    return render(request, '500.html')
