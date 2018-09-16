@@ -3,6 +3,7 @@ from django.shortcuts import render
 from blog.models import Blog, Category, Tag, Comment
 from blog.forms import CommentForm
 import markdown
+from django.shortcuts import get_object_or_404
 
 
 def index(request):
@@ -50,7 +51,7 @@ def get_articlelist(request):
 
 
 def detail(request, article_id):
-    article = Blog.objects.get(id=article_id)
+    article = get_object_or_404(Blog, id=article_id)
     article.click_nums = int(article.click_nums) + 1
     article.save()
     cmt_list = Comment.objects.filter(blog_id=article_id).order_by('-create_time')[:3]
