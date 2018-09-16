@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ tag.name }}{% endblock %}
+
+{% block content %}
+<div class="archive_card">
+    <h1>"{{ tag.name }}" 标签下的文章有</h1>
+</div>
+<div class="archive_card">
+    <ul>
+        {% for blog in blogs %}
+        <li class="category_li"><a href="/article/{{ blog.id }}/" title="{{ blog.title }}"><span>{{ blog.create_time }}
+                    - </span>{{ blog.title }}</a></li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock content %}

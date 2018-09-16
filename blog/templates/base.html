@@ -1,0 +1,142 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}
+        <!-- 标题 -->{% endblock title %} - Javen's Blog</title>
+    <meta name="description" content="Javen's Blog">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory -->
+    <link rel="shortcut icon" rel="external nofollow" href="{% static 'favicon.ico' %}" />
+    <link rel="stylesheet" href="https://necolas.github.io/normalize.css/latest/normalize.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        <img src="/static/img/logo.png" alt="Javen's Blog" class="logo_img">
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse navbar-ex1-collapse navbar-right">
+                    <ul class="nav navbar-nav" style="margin-top: 0;">
+                        <li id="nav_index"><a href="/"><span class="fa fa-home"></span> 首页</a></li>
+                        <li id="nav_archive"><a href="/archive/"><i class="fa fa-folder"></i> 归档</a></li>
+                        <li id="nav_index"><a href="#"><i class="fa fa-snapchat"></i> 闲聊</a></li>
+                        <li id="nav_aboutme"><a href="/aboutme/"><i class="fa fa-info-circle"></i> 关于</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-left" role="search">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                        </div>
+                        <button type="submit" class="btn btn-default">搜索</button>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-lg-8 col_reset">
+                    {% block content %}
+                    <!-- 主要内容 -->
+                    {% endblock content %}
+                </div>
+                <div class="col-md-4 col-lg-4 hidden-sm hidden-xs col_reset">
+                    <div class="sidebar_container">
+                        <div class="sidebar_card">
+                            <div class="siderbar_header">
+                                <h4><i class="fa fa-calendar-check-o"></i> 每日一句</h4>
+                            </div>
+                            <hr>
+                            <div class="siderbar_body">
+                                <div class="everyday_sentence">
+                                    <img src="/static/img/es_img.png" alt="" id="es_img" class="img-responsive">
+                                    <p>今天是<span id="today"></span></p>
+                                    <p id="es_content"></p>
+                                    <p id="es_note"></p>
+                                    <p>来源:<span id="es_from"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar_card">
+                            <div class="siderbar_header">
+                                <h4><i class="fa fa-link"></i> 链接</h4>
+                            </div>
+                            <hr>
+                            <div class="siderbar_body">
+                                <a href="https://weibo.com/523923012" title="前往博主的微博"><i class="fa fa-weibo"></i>JieWHuang's
+                                    MicroBlog</a>
+                                <a href="https://github.com/JieWHuang" title="前往博主的Github"><i class="fa fa-github"></i>JieWHuang's
+                                    Gitbub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>
+                Copyright 2018 <i class="fa fa-copyright"></i>
+                <a href="https://github.com/JieWHuang" target="_blank" title="前往博主的Github">Javen</a>
+                Powered by <a href="https://www.djangoproject.com/" target="_blank" title="Django">Django</a>.
+            </p>
+        </div>
+    </footer>
+
+    <div style="display: none;" href="javascript:;" id="back_top" title="回到顶部" class="back_top">
+        <i class="fa fa-arrow-circle-up"></i>
+    </div>
+
+    <script src="/static/js/modernizr-3.6.0.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="/static/js/plugins.js"></script>
+    <script src="/static/js/main.js"></script>
+
+    <script>
+        $this_nav = "{{ nav }}";
+        $('#nav_' + $this_nav).addClass("active");
+    </script>
+
+    {% block script %}
+    <!-- 额外Javascript -->
+    {% endblock script %}
+
+    <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+    <script>
+        window.ga = function () {
+            ga.q.push(arguments)
+        };
+        ga.q = [];
+        ga.l = +new Date;
+        ga('create', 'UA-125846209-1', 'auto');
+        ga('send', 'pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+</html>

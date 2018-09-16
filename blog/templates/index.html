@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}首页{% endblock %}
+
+{% block content %}
+<div id="blog_carousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-target="#blog_carousel" data-slide-to="0" class=""></li>
+        <li data-target="#blog_carousel" data-slide-to="1" class=""></li>
+        <li data-target="#blog_carousel" data-slide-to="2" class="active"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="item">
+            <a href="/article/1/"><img src="/static/img/silde01.png" alt="First slide" class="img-responsive"></a>
+        </div>
+        <div class="item">
+            <a href="/article/2/"><img src="/static/img/silde02.png" alt="Second slide" class="img-responsive"></a>
+        </div>
+        <div class="item active">
+            <a href="#"><img src="/static/img/silde03.png" alt="Third slide" class="img-responsive"></a>
+        </div>
+    </div>
+    <a class="carousel-control left" href="#blog_carousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a class="carousel-control right" href="#blog_carousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+</div>
+<br>
+<ul class="summary_list" id="summary_list">
+</ul>
+<div class="more" id="more">
+
+</div>
+{% endblock content %}
+
+{% block script %}
+<script src="/static/js/articlesListAjax.js"></script>
+<script>
+    var page = 1;
+    get_list("api/v1/articlesListAjax?page=" + page);
+    function get_list_btn() {
+        page = page + 1;
+        get_list("api/v1/articlesListAjax?page=" + page);
+    };
+</script>
+{% endblock script %}

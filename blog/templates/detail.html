@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="info article_card">
+    <h1>{{ article.title }}</h1>
+    <ul class="breadcrumb">
+        <li>{{ article.create_time|date:'Y年m月d日' }}</li>
+        <li><i class="fa fa-eye"></i> <span id="click_nums">{{ article.click_nums }}</span></li>
+        <li><i class="fa fa-comment"></i> <span id="cmt_nums">{{ cmt_nums }}</span></li>
+    </ul>
+</div>
+<div class="article_card">
+    <div class="article_content" id="post_content">
+        {{ article_content|safe }}
+    </div>
+    <div class="article_pagination clearfix">
+        <div class="prev">
+            <span>上一篇</span>
+            <span>
+                {% if has_prev %}
+                <a href="/article/{{ blog_prev.id }}/" rel="prev" title="{{ blog_prev.title }}">{{ blog_prev.title }}</a>
+                {% else %}
+                不必回首
+                {% endif %}
+            </span>
+        </div>
+        <div class="next">
+            <span>下一篇</span>
+            <span>
+                {% if has_next %}
+                <a href="/article/{{ blog_next.id }}/" rel="next" title="{{ blog_next.title }}">{{ blog_next.title }}</a>
+                {% else %}
+                敬请期待
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="cmt_card" id="comment">
+    <h4><i class="fa fa-comment"></i> 留言</h4>
+    <div class="cmt_content">
+        <p id="no_cmt">还没有任何评论，你来说两句吧</p>
+        <ul id="cmt_ul">
+            {% for cmt in cmt_list %}
+            <li>
+                <article class="comment">
+                    <header class="comment-header clearfix">
+                        <span class="nickname">{{ cmt.nickname }}</span>
+                        <span class="postdate">于 {{ cmt.create_time }} 留言</span>
+                    </header>
+                    <div class="comment-body">
+                        <p>{{ cmt.cmt_content }}</p>
+                    </div>
+                </article>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="cmt_card">
+    <h4><i class="fa fa-pencil"></i> 发表留言</h4>
+    <div class="cmt_form">
+        <form id="cmt_form">
+            <textarea id="cmt_content" placeholder="内容..." tabindex="1" name="cmt_content"></textarea>
+            <input type="text" name="nickname" id="nickname" placeholder="昵称*" tabindex="2">
+            <input type="text" name="email" id="email" placeholder="电子邮件*" tabindex="3">
+            <input name="blog" type="hidden" id="blog" value="{{ article.id }}" tabindex="4">
+            <button name="submit" type="button" id="submit" tabindex="5">回复</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
+
+{% block script %}
+
+<script>
+    $cmt_nums = $("#cmt_nums").html();
+    if ($cmt_nums == '0') {
+        $("#no_cmt").show();
+        $("#cmt_ul").hide();
+    } else {
+        $("#no_cmt").hide();
+        $("#cmt_ul").show();
+    }
+    ;
+
+    $("#submit").on('click', function () {
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "/api/v1/postCommentAjax",
+            data: $('#cmt_form').serialize(),
+            dateType: "json",
+            async: true,
+            beforeSend: function (xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            },
+            success: function (data) {
+                if (data.status == 'success') {
+                    alert("提交成功");
+                    window.location.reload();
+                } else if (data.status == 'fail') {
+                    alert("评论填写有误，请重新评论");
+                }
+            }
+        });
+    });
+</script>
+
+{% endblock script %}
