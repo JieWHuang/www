@@ -85,10 +85,10 @@ SQLITE_DATABASES = {
 MYSQL_DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blog',
-        'USER': 'root',
-        'PASSWORD': 'Aa186320#',
-        'HOST': '127.0.0.1',
+        'NAME': '********',
+        'USER': '********',
+        'PASSWORD': '********',
+        'HOST': '********',
         'PORT': '3306',
     }
 }
