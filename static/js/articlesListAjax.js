@@ -14,7 +14,7 @@ function get_list(url) {
                     item_html = '<li class="post_item" id=' + data.data[i].id + '><h3><i class="fa fa-hand-o-right"></i> <a href="article/' + data.data[i].id + '" title="' + data.data[i].title + '" id="title">' + data.data[i].title + '</a></h3><div class="description"><span class="time">' + data.data[i].create_time + ' - </span>' + data.data[i].description + '</div><div class="article_info"><span class="classify"><a href="/category/' + data.data[i].category_id + '/"><i class="fa fa-hashtag"></i>' + data.data[i].category + '</a></span><div class="label_box">' + label_box_html + '</div><span class="view"><i class="fa fa-eye"></i> ' + data.data[i].click_nums + '</span>' + '<a href="article/' + data.data[i].id + '#comment">' + '<span class="reply"><i class="fa fa-comment"></i> ' + data.data[i].cmt_nums + '</span></a></div></li>';
                     $('#summary_list').append(item_html);
                 }
-                if (data.totals == data.current_page) {
+                if (data.paging.totals == data.paging.current_page) {
                     $('#more').html("没有更多文章了...")
                 } else {
                     $('#more').html('<a href="javascript:get_list_btn();" id="next">点击加载更多...</a>')
