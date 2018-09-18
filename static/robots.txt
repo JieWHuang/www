@@ -1,6 +1,8 @@
 User-agent: *
 Disallow: /admin
 Disallow: /archive
+Disallow: /category
+Disallow: /tag
 Disallow: /aboutme
 Disallow: /article
 Disallow: /*.png$
