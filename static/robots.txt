@@ -3,3 +3,8 @@ Disallow: /admin
 Disallow: /archive
 Disallow: /aboutme
 Disallow: /article
+Disallow: /*.png$
+Disallow: /*.jpg$
+Disallow: /*.jpeg$
+Disallow: /*.gif$
+Disallow: /*.bmp$
