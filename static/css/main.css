@@ -550,6 +550,29 @@ footer p {
     text-align: right;
 }
 
+/* animation */
+.summary_list .post_item,
+.more {
+   opacity: 0;
+   position: relative;
+   top: 30px;
+}
+
+@keyframes showList {
+from {
+   opacity: 0;
+   top: 30px;
+}
+
+to {
+   opacity: 1;
+   top: 0px;
+  }
+}
+
+.list_show {
+   animation: showList 0.5s ease 1 forwards;
+}
 
 /* ==========================================================================
    Helper classes
