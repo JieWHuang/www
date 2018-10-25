@@ -49,7 +49,8 @@
                     </ul>
                     <form class="navbar-form navbar-left" role="search" action="https://www.google.com/search" id="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" name="q" id="search_q" autocomplete="off">
+                            <input type="text" class="form-control" placeholder="Search" id="search_q_show" autocomplete="off">
+                            <input type="text" name="q" id="search_q" style="display: none;">
                         </div>
                         <button type="submit" class="btn btn-default">搜索</button>
                     </form>
@@ -124,8 +125,8 @@
         $('#nav_' + $this_nav).addClass("active");
         
         $('#search').submit(function () {
-            $search_q = $("#search_q").val();
-            $("#search_q").val($search_q + " site:jwhuang.tk");
+            $search_q_show = $("#search_q_show").val();
+            $("#search_q").val($search_q_show + " site:jwhuang.tk");
         })
     </script>
 
