@@ -3,23 +3,13 @@ upstream django {
 }
 
 server {
-    listen 443 ssl;
-    ssl on;
-    ssl_certificate /etc/letsencrypt/live/jwhuang.tk/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/jwhuang.tk/privkey.pem;
-    ssl_session_timeout 5m;
-    ssl_protocols SSLv3 TLSv1;
-    ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv3:+EXP;
-    ssl_prefer_server_ciphers on;
+    listen 80;
     server_name jwhuang.tk www.jwhuang.tk;
     access_log /var/log/nginx/access.log main;
     charset utf-8;
     client_max_body_size 75M;
     # 指定项目路径uwsgi
     location / {
-        proxy_pass http://127.0.0.1:8090;
-        proxy_set_header Host $host;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         uwsgi_pass unix:/root/www/conf/uwsgi.sock;
         include uwsgi_params;
         add_header Access-Control-Allow-Origin *;
@@ -49,10 +39,4 @@ server {
     location  /sitemap.xml {
         alias /root/www/static/sitemap.xml;
     }
-}
-
-server {
-    listen 80;
-    server_name jwhuang.tk www.jwhuang.tk;
-    return 301 https://$server_name$request_uri;
 }
