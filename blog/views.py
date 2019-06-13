@@ -4,8 +4,6 @@ from blog.models import Blog, Category, Tag, Comment
 from blog.forms import CommentForm
 import markdown
 from django.shortcuts import get_object_or_404
-import requests
-import json
 
 
 def index(request):
@@ -142,14 +140,4 @@ def page_not_found(request):
 
 def page_errors(request):
     return render(request, '500.html')
-
-
-def get_dsapi(request):
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'
-    }
-    r = requests.get('http://open.iciba.com/dsapi/', headers=headers)
-    r.encoding = r.apparent_encoding
-    result = json.loads(r.text)
-    return JsonResponse(result)
 
