@@ -1,7 +1,7 @@
 $("[data-toggle='tooltip']").tooltip();
 
 function everyday_sentence() {
-    var dsapi = "https://open.iciba.com/dsapi/";
+    var dsapi = "/get_dsapi/";
     $.ajax({
         url: dsapi,
         type: 'GET',
