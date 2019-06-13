@@ -32,6 +32,7 @@ urlpatterns = [
     url(r'^api/v1/articlesListAjax$', views.get_articlelist, name='get_articlelist'),
     url(r'^api/v1/postCommentAjax$', views.add_comment, name='add_comment'),
     url(r'^aboutme/$', views.about, name='about'),
+    url(r'^get_dsapi/$', views.get_dsapi, name='get_dsapi'),
     url(r'^static/(?P<path>.*)/$', serve, {'document_root': STATIC_ROOT}),
 ]
 
