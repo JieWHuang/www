@@ -1,7 +1,7 @@
 $("[data-toggle='tooltip']").tooltip();
 
 function everyday_sentence() {
-    var dsapi = "/get_dsapi/";
+    var dsapi = "https://open.iciba.com/dsapi/";
     $.ajax({
         url: dsapi,
         type: 'GET',
@@ -12,7 +12,7 @@ function everyday_sentence() {
             $("#es_content").html(data.content);
             $("#es_note").html(data.note);
             $("#es_from").html(data.caption);
-            $("#es_img").attr("src", data.picture);
+            $("#es_img").attr("src", data.picture.replace('http://','https://'));
             $("#es_img").attr("alt", data.dateline);
         }
     });
